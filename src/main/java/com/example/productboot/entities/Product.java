@@ -10,6 +10,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -29,6 +30,13 @@ public class Product {
   private Long id;
   private String name;
   private BigDecimal price;
+
+  private String description;
+
+  private String thumbnail;
+
+  @OneToMany(mappedBy = "product")
+  private List<Image> images;
 
   @ManyToMany(mappedBy = "products")
   @JsonIgnore
