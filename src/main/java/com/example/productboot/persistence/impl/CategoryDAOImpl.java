@@ -4,11 +4,13 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import com.example.productboot.entities.Category;
 import com.example.productboot.persistence.ICategoryDAO;
 import com.example.productboot.repositories.ICategoryRespository;
 
+@Component
 public class CategoryDAOImpl implements ICategoryDAO {
 
   @Autowired
