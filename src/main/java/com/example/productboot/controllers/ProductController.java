@@ -36,7 +36,7 @@ public class ProductController {
 
     Product product = productOptional.get();
     ProductDTO productDTO = new ProductDTO(product.getId(), product.getName(), product.getPrice(),
-        product.getCategories());
+        product.getDescription(), product.getThumbnail(), product.getImages(), product.getCategories());
 
     return ResponseEntity.ok(productDTO);
   }
@@ -48,6 +48,9 @@ public class ProductController {
         .map(product -> new ProductDTO(product.getId(),
             product.getName(),
             product.getPrice(),
+            product.getDescription(),
+            product.getThumbnail(),
+            product.getImages(),
             product.getCategories()))
         .toList();
 
@@ -62,6 +65,9 @@ public class ProductController {
     Product product = new Product();
     product.setName(productDTO.getName());
     product.setPrice(productDTO.getPrice());
+    product.setDescription(productDTO.getDescription());
+    product.setThumbnail(productDTO.getThumnail());
+    product.setImages(productDTO.getImages());
     product.setCategories(productDTO.getCategories());
 
     Product newProduct = productService.save(product);
@@ -81,6 +87,9 @@ public class ProductController {
     Product product = productOptional.get();
     product.setName(productDTO.getName());
     product.setPrice(productDTO.getPrice());
+    product.setDescription(productDTO.getDescription());
+    product.setThumbnail(productDTO.getThumnail());
+    product.setImages(productDTO.getImages());
     product.setCategories(productDTO.getCategories());
 
     Product newProduct = productService.save(product);
