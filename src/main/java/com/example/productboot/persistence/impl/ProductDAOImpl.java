@@ -33,8 +33,8 @@ public class ProductDAOImpl implements IProductDAO {
   }
 
   @Override
-  public void save(Product product) {
-    productRespository.save(product);
+  public Product save(Product product) {
+    return productRespository.save(product);
   }
 
   @Override

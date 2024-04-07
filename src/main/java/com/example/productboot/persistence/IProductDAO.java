@@ -14,7 +14,7 @@ public interface IProductDAO {
 
   List<Product> findByPriceInRange(BigDecimal minPrice, BigDecimal maxPrice);
 
-  void save(Product product);
+  Product save(Product product);
 
   void deleteById(Long id);
 
