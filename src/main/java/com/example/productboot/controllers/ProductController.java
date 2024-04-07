@@ -7,6 +7,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -54,7 +55,7 @@ public class ProductController {
   }
 
   @PostMapping
-  public ResponseEntity<?> save(@RequestBody ProductDTO productDTO) throws URISyntaxException {
+  public ResponseEntity<?> save(@Validated @RequestBody ProductDTO productDTO) throws URISyntaxException {
     if (productDTO.getName().isBlank())
       return ResponseEntity.badRequest().build();
 
@@ -71,7 +72,7 @@ public class ProductController {
   }
 
   @PutMapping("/{id}")
-  public ResponseEntity<?> updateProduct(@PathVariable Long id, @RequestBody ProductDTO productDTO) {
+  public ResponseEntity<?> updateProduct(@PathVariable Long id, @Validated @RequestBody ProductDTO productDTO) {
     Optional<Product> productOptional = productService.findById(id);
 
     if (productOptional.isEmpty())

@@ -23,10 +23,10 @@ public class ProductDTO {
 
   private Long id;
 
-  @NotBlank
+  @NotBlank(message = "must be not empty")
   private String name;
 
-  @NotNull
+  @NotNull(message = "price is required")
   @DecimalMin("0.01")
   private BigDecimal price;
   
