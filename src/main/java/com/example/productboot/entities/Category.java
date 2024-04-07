@@ -2,6 +2,7 @@ package com.example.productboot.entities;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -23,10 +24,11 @@ import lombok.ToString;
 public class Category {
 
   @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
   private String name;
 
   @ManyToMany
+  @JsonIgnore
   private List<Product> products;
 }
