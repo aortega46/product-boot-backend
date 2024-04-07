@@ -1,12 +1,12 @@
 INSERT INTO category (name) VALUES ('Electrónicos'), ('Ropa'), ('Hogar');
 
 INSERT INTO product (name, price, description, thumbnail) VALUES ( 'Smartphone', 599.99, "Generic description", "https://cdn.dummyjson.com/product-images/1/thumbnail.jpg");
-INSERT INTO product (name, price, description, thumbnail) VALUES ('Televisor', 799.99, "Generic description", "https://cdn.dummyjson.com/product-images/1/thumbnail.jpg");
-INSERT INTO product (name, price, description, thumbnail) VALUES ('Laptop', 1299.99, "Generic description", "https://cdn.dummyjson.com/product-images/1/thumbnail.jpg");
-INSERT INTO product (name, price, description, thumbnail) VALUES ('Camiseta', 19.99, "Generic description", "https://cdn.dummyjson.com/product-images/1/thumbnail.jpg");
-INSERT INTO product (name, price, description, thumbnail) VALUES ('Pantalones', 29.99, "Generic description", "https://cdn.dummyjson.com/product-images/1/thumbnail.jpg");
-INSERT INTO product (name, price, description, thumbnail) VALUES ('Mesa de centro', 149.99, "Generic description", "https://cdn.dummyjson.com/product-images/1/thumbnail.jpg");
-INSERT INTO product (name, price, description, thumbnail) VALUES ('Lámpara de pie', 79.99, "Generic description", "https://cdn.dummyjson.com/product-images/1/thumbnail.jpg");
+INSERT INTO product (name, price, description, thumbnail) VALUES ('Televisor', 799.99, "Generic description", "https://cdn.dummyjson.com/product-images/2/thumbnail.jpg");
+INSERT INTO product (name, price, description, thumbnail) VALUES ('Laptop', 1299.99, "Generic description", "https://cdn.dummyjson.com/product-images/3/thumbnail.jpg");
+INSERT INTO product (name, price, description, thumbnail) VALUES ('Camiseta', 19.99, "Generic description", "https://cdn.dummyjson.com/product-images/4/thumbnail.jpg");
+INSERT INTO product (name, price, description, thumbnail) VALUES ('Pantalones', 29.99, "Generic description", "https://cdn.dummyjson.com/product-images/5/thumbnail.jpg");
+INSERT INTO product (name, price, description, thumbnail) VALUES ('Mesa de centro', 149.99, "Generic description", "https://cdn.dummyjson.com/product-images/6/thumbnail.jpg");
+INSERT INTO product (name, price, description, thumbnail) VALUES ('Lámpara de pie', 79.99, "Generic description", "https://cdn.dummyjson.com/product-images/7/thumbnail.jpg");
 
 INSERT INTO category_products (categories_id, products_id) VALUES (1, 1), (1, 2), (1, 3), (2, 4), (2, 5), (3, 6), (3, 7);  
 
