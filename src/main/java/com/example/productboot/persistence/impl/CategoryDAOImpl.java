@@ -27,8 +27,8 @@ public class CategoryDAOImpl implements ICategoryDAO {
   }
 
   @Override
-  public void save(Category category) {
-    categoryRespository.save(category);
+  public Category save(Category category) {
+    return categoryRespository.save(category);
   }
 
   @Override
