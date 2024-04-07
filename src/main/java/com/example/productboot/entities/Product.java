@@ -3,6 +3,7 @@ package com.example.productboot.entities;
 import java.math.BigDecimal;
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -23,7 +24,7 @@ import lombok.ToString;
 public class Product {
 
   @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
   private String name;
   private BigDecimal price;
