@@ -37,7 +37,7 @@ public class ProductDTO {
   private String  description;
   
   @URL(message = "must be an url")
-  private String thumnail;
+  private String thumbnail;
   private List<Image> images;
   
   private List<Category> categories;
