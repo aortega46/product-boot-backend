@@ -16,10 +16,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.example.productboot.dto.ProductDTO;
 import com.example.productboot.entities.Product;
 import com.example.productboot.services.IProductService;
+
+import jakarta.validation.constraints.Size;
 
 @RestController
 @RequestMapping("/api/products")
@@ -112,6 +115,14 @@ public class ProductController {
     productService.deleteById(id);
 
     return ResponseEntity.ok("Product removed");
+  }
+
+  @GetMapping("/search")
+  public ResponseEntity<?> findProductsByName(
+      @RequestParam(name = "name", required = false) @Size(min = 3) String name) {
+    List<Product> products = productService.findProductsByName(name);
+
+    return ResponseEntity.ok(products);
   }
 
 }

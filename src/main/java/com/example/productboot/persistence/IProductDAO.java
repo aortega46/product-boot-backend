@@ -18,4 +18,5 @@ public interface IProductDAO {
 
   void deleteById(Long id);
 
+  List<Product> findProductsByName(String productName);
 }

@@ -42,4 +42,9 @@ public class ProductDAOImpl implements IProductDAO {
     productRespository.deleteById(id);
   }
 
+  @Override
+  public List<Product> findProductsByName(String productName) {
+    return productRespository.findByNameContainingIgnoreCaseOrDescriptionContainingIgnoreCase(productName, productName);
+  }
+
 }

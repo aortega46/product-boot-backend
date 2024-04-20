@@ -18,4 +18,6 @@ public interface IProductService {
 
   void deleteById(Long id);
 
+  List<Product> findProductsByName(String productName);
+
 }

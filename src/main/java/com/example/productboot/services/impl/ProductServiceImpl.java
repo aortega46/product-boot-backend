@@ -42,4 +42,13 @@ public class ProductServiceImpl implements IProductService {
     productDAO.deleteById(id);
   }
 
+  @Override
+  public List<Product> findProductsByName(String productName) {
+    if (productName == null || productName.isBlank()) {
+      return productDAO.findAll();
+    } else {
+      return productDAO.findProductsByName(productName);
+    }
+  }
+
 }
