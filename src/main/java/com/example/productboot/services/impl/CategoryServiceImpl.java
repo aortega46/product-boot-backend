@@ -36,4 +36,9 @@ public class CategoryServiceImpl implements ICategoryService {
     categoryDAO.deleteById(id);
   }
 
+  @Override
+  public Category findByName(String categoryName) {
+    return categoryDAO.findByName(categoryName);
+  }
+
 }

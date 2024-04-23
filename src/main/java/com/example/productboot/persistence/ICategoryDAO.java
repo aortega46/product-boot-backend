@@ -14,4 +14,6 @@ public interface ICategoryDAO {
   Category save(Category category);
 
   void deleteById(Long id);
+
+  Category findByName(String categoryName);
 }

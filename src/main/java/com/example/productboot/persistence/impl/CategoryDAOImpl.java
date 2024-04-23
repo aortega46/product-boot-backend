@@ -36,4 +36,9 @@ public class CategoryDAOImpl implements ICategoryDAO {
     categoryRespository.deleteById(id);
   }
 
+  @Override
+  public Category findByName(String categoryName) {
+    return categoryRespository.findByName(categoryName);
+  }
+
 }

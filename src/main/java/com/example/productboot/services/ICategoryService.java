@@ -13,4 +13,6 @@ public interface ICategoryService {
   Category save(Category category);
 
   void deleteById(Long id);
+
+  Category findByName(String categoryName);
 }
