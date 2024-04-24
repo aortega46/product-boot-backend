@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
+import com.example.productboot.dto.ProductDTO;
 import com.example.productboot.entities.Product;
 
 public interface IProductService {
@@ -20,4 +21,9 @@ public interface IProductService {
 
   List<Product> findProductsByName(String productName);
 
+  ProductDTO fromProduct(Product product);
+
+  Product fromDTO(ProductDTO productDTO);
+
+  Product updateFromDTO(Product product, ProductDTO productDTO);
 }
