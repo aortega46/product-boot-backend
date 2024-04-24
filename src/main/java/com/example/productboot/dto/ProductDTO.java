@@ -5,9 +5,6 @@ import java.util.List;
 
 import org.hibernate.validator.constraints.URL;
 
-import com.example.productboot.entities.Category;
-import com.example.productboot.entities.Image;
-
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -34,12 +31,12 @@ public class ProductDTO {
   private BigDecimal price;
 
   @NotNull(message = "description is required")
-  private String  description;
-  
+  private String description;
+
   @URL(message = "must be an url")
   private String thumbnail;
-  private List<Image> images;
-  
-  private List<Category> categories;
+  private List<String> images;
+
+  private List<String> categories;
 
 }
