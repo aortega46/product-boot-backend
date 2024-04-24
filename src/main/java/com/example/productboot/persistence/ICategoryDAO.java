@@ -15,5 +15,5 @@ public interface ICategoryDAO {
 
   void deleteById(Long id);
 
-  Category findByName(String categoryName);
+  Optional<Category> findByName(String categoryName);
 }

@@ -1,10 +1,12 @@
 package com.example.productboot.services.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.example.productboot.entities.Category;
 import com.example.productboot.persistence.ICategoryDAO;
@@ -37,7 +39,7 @@ public class CategoryServiceImpl implements ICategoryService {
   }
 
   @Override
-  public Category findByName(String categoryName) {
+  public Optional<Category> findByName(String categoryName) {
     return categoryDAO.findByName(categoryName);
   }
 

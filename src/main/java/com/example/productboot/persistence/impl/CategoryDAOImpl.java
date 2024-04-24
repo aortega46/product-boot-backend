@@ -37,7 +37,7 @@ public class CategoryDAOImpl implements ICategoryDAO {
   }
 
   @Override
-  public Category findByName(String categoryName) {
+  public Optional<Category> findByName(String categoryName) {
     return categoryRespository.findByName(categoryName);
   }
 
