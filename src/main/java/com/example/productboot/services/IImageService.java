@@ -14,4 +14,6 @@ public interface IImageService {
   Image save(Image image);
 
   void deleteById(String id);
+
+  List<Image> saveAll(List<Image> images);
 }
