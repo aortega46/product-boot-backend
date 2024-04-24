@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.example.productboot.dto.ProductDTO;
 import com.example.productboot.entities.Product;
+import com.example.productboot.exceptions.CategoryNotFoundException;
 import com.example.productboot.services.IProductService;
 
 import jakarta.validation.constraints.Size;
@@ -40,8 +41,7 @@ public class ProductController {
       return ResponseEntity.notFound().build();
 
     Product product = productOptional.get();
-    ProductDTO productDTO = new ProductDTO(product.getId(), product.getName(), product.getPrice(),
-        product.getDescription(), product.getThumbnail(), product.getImages(), product.getCategories());
+    ProductDTO productDTO = productService.fromProduct(product);
 
     return ResponseEntity.ok(productDTO);
   }
@@ -50,13 +50,7 @@ public class ProductController {
   public ResponseEntity<?> findAll() {
     List<ProductDTO> productsDTO = productService.findAll()
         .stream()
-        .map(product -> new ProductDTO(product.getId(),
-            product.getName(),
-            product.getPrice(),
-            product.getDescription(),
-            product.getThumbnail(),
-            product.getImages(),
-            product.getCategories()))
+        .map(product -> productService.fromProduct(product))
         .toList();
 
     return ResponseEntity.ok(productsDTO);
@@ -64,65 +58,57 @@ public class ProductController {
 
   @PostMapping
   public ResponseEntity<?> save(@Validated @RequestBody ProductDTO productDTO) throws URISyntaxException {
-    if (productDTO.getName().isBlank())
-      return ResponseEntity.badRequest().build();
+    try {
+      Product product = productService.save(productService.fromDTO(productDTO));
+      ProductDTO newProductDTO = productService.fromProduct(product);
 
-    Product product = new Product();
-    product.setName(productDTO.getName());
-    product.setPrice(productDTO.getPrice());
-    product.setDescription(productDTO.getDescription());
-    product.setThumbnail(productDTO.getThumbnail());
-    product.setImages(productDTO.getImages());
-    product.setCategories(productDTO.getCategories());
+      URI location = new URI("/api/products/" + newProductDTO.getId());
 
-    Product newProduct = productService.save(product);
+      return ResponseEntity.created(location).body(newProductDTO);
 
-    URI location = new URI("/api/products/" + newProduct.getId());
-
-    return ResponseEntity.created(location).body(newProduct);
+    } catch (CategoryNotFoundException e) {
+      return ResponseEntity.badRequest().body(e.getMessage());
+    } catch (Exception e) {
+      return ResponseEntity.internalServerError().body("Something bad happened with your request");
+    }
   }
 
   @PutMapping("/{id}")
   public ResponseEntity<?> updateProduct(@PathVariable Long id, @Validated @RequestBody ProductDTO productDTO) {
-    Optional<Product> productOptional = productService.findById(id);
+    try {
+      Optional<Product> productOptional = productService.findById(id);
 
-    if (productOptional.isEmpty())
-      return ResponseEntity.notFound().build();
+      if (productOptional.isEmpty())
+        return ResponseEntity.notFound().build();
 
-    Product product = productOptional.get();
-    product.setName(productDTO.getName());
-    product.setPrice(productDTO.getPrice());
-    product.setDescription(productDTO.getDescription());
-    product.setThumbnail(productDTO.getThumbnail());
-    product.setImages(productDTO.getImages());
-    product.setCategories(productDTO.getCategories());
+      Product updatedProduct = productService.updateFromDTO(productOptional.get(), productDTO);
 
-    Product newProduct = productService.save(product);
-
-    return ResponseEntity.ok(newProduct);
+      return ResponseEntity.ok(productService.fromProduct(updatedProduct));
+    } catch (CategoryNotFoundException e) {
+      return ResponseEntity.badRequest().body(e.getMessage());
+    } catch (Exception e) {
+      return ResponseEntity.internalServerError().body("Something bad happened with your request");
+    }
   }
 
   @DeleteMapping("/{id}")
   public ResponseEntity<?> delete(@PathVariable Long id) {
-    if (id == null)
-      return ResponseEntity.badRequest().build();
+    try {
+      productService.deleteById(id);
 
-    Optional<Product> productOptional = productService.findById(id);
-
-    if (productOptional.isEmpty())
-      return ResponseEntity.notFound().build();
-
-    productService.deleteById(id);
-
-    return ResponseEntity.ok("Product removed");
+      return ResponseEntity.ok("Product removed");
+    } catch (Exception e) {
+      return ResponseEntity.internalServerError().body("Failed to delete product " + e.getMessage());
+    }
   }
 
   @GetMapping("/search")
   public ResponseEntity<?> findProductsByName(
       @RequestParam(name = "name", required = false) @Size(min = 3) String name) {
-    List<Product> products = productService.findProductsByName(name);
+    List<ProductDTO> productsDTO = productService.findProductsByName(name).stream()
+        .map(product -> productService.fromProduct(product)).toList();
 
-    return ResponseEntity.ok(products);
+    return ResponseEntity.ok(productsDTO);
   }
 
 }
