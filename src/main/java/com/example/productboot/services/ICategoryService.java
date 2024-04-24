@@ -16,4 +16,5 @@ public interface ICategoryService {
 
   Optional<Category> findByName(String categoryName);
 
+  List<Category> saveAll(List<Category> categories);
 }

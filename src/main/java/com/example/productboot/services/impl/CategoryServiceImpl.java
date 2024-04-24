@@ -43,4 +43,14 @@ public class CategoryServiceImpl implements ICategoryService {
     return categoryDAO.findByName(categoryName);
   }
 
+  @Override
+  @Transactional
+  public List<Category> saveAll(List<Category> categories) {
+    List<Category> savedCategories = new ArrayList<>();
+    for (Category category : categories) {
+      savedCategories.add(save(category));
+    }
+
+    return savedCategories;
+  }
 }
